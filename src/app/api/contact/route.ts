@@ -2,12 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
-  host: 'mail.reneedesignlab.com',
-  port: 465,
+  host: process.env.SMTP_HOST ?? 'mail.reneedesignlab.com',
+  port: Number(process.env.SMTP_PORT ?? 465),
   secure: true,
   auth: {
-    user: 'egemen.cengiz@reneedesignlab.com',
-    pass: 'Renee1999**',
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
   },
 });
 
