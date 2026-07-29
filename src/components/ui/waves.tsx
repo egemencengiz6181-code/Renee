@@ -26,7 +26,7 @@ interface Point {
   cursor: { x: number; y: number; vx: number; vy: number };
 }
 
-const TARGET_FPS = 30;
+const TARGET_FPS = 24; // Reduced from 30 for better performance
 const FRAME_INTERVAL = 1000 / TARGET_FPS;
 
 export default function Waves({
