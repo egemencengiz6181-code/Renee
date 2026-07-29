@@ -53,25 +53,24 @@ export default function HeroMain() {
           fill
           className="object-cover object-center opacity-[0.08]"
           sizes="100vw"
-          loading="lazy"
+          quality={40}
+          loading="eager"
+          priority
         />
       </div>
 
       {/* ── VIGNETTE OVERLAY ─────────────────────────────────── */}
       <div className="absolute inset-0 z-[2] bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,transparent_40%,rgba(255,255,255,0.82)_100%)] dark:bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,transparent_40%,rgba(0,0,0,0.82)_100%)]" />
 
-      {/* ── PURPLE GLOW ──────────────────────────────────────── */}
-      <motion.div
-        className="absolute z-[2] w-[720px] h-[720px] rounded-full blur-[160px] opacity-[0.18]"
+      {/* ── GLOW ──────────────────────────────────────── */}
+      <div
+        className="absolute z-[2] w-[720px] h-[720px] rounded-full blur-[160px] opacity-[0.18] animate-[pulse_14s_ease-in-out_infinite]"
         style={{
           background: "radial-gradient(circle, #E35205 0%, #A03500 50%, transparent 80%)",
           top: "50%",
           left: "50%",
-          x: "-50%",
-          y: "-50%",
+          transform: "translate(-50%, -50%)",
         }}
-        animate={{ scale: [1, 1.07, 0.97, 1] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* ── CONTENT (z-10) ───────────────────────────────────── */}

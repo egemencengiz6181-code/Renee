@@ -17,7 +17,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Index' });
-  const origin = 'https://www.sirinevlerfinal.com';
+  const origin = 'https://www.bahcelievlersevinc.com';
   return {
     title: t('title'),
     description: t('description'),

@@ -5,16 +5,16 @@ import Footer from '@/components/shared/Footer';
 import MobileStickyButton from '@/components/shared/MobileStickyButton';
 import Providers from './providers';
 import {locales} from '@/config/locales';
-import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import '../globals.css';
 
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-inter',
   preload: true,
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
 });
 
 export function generateStaticParams() {
@@ -63,31 +63,44 @@ export default async function LocaleLayout({
   const {locale} = await params;
   const messages = await getMessages();
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
+    name: 'Bahçelievler Sevinç Dershanesi',
+    url: 'https://www.bahcelievlersevinc.com',
+    logo: 'https://www.bahcelievlersevinc.com/logos/Sevinc-Kurs-Logo.png',
+    description: 'Bahçelievler Sevinç Dershanesi — Ortaokul, lise ve YKS hazırlık ders programları.',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Bahçelievler',
+      addressRegion: 'İstanbul',
+      addressCountry: 'TR',
+    },
+    areaServed: {
+      '@type': 'City',
+      name: 'İstanbul',
+    },
+  };
+
   return (
     <html lang={locale} className={inter.variable} suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="bg-background text-foreground antialiased selection:bg-primary/30 min-h-screen relative font-sans" suppressHydrationWarning>
-        {/* Arka Plan İkonu (Global Mühür) */}
-        <div className="fixed top-[15%] right-[-250px] w-[900px] h-[900px] opacity-[0.08] rotate-12 pointer-events-none z-0">
-          <Image 
-            src="/logos/Sevinc-Kurs-Logo.png" 
-            alt="" 
-            fill 
-            className="object-contain"
-            loading="lazy"
-            sizes="900px"
-          />
-        </div>
-
         <Providers locale={locale} messages={messages ?? {}}>
             <Navbar />
             <main className="relative z-10 pb-20 md:pb-0">
               {children}
             </main>
             <Footer />
-            {/* Mobil sticky buton — her sayfada görünür, layout seviyesinde */}
             <MobileStickyButton />
         </Providers>
       </body>

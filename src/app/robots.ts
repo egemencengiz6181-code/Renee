@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const origin = 'https://www.sirinevlerfinal.com';
+  const origin = 'https://www.bahcelievlersevinc.com';
   return {
     rules: [
       {

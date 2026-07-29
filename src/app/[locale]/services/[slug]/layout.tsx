@@ -27,7 +27,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const origin = 'https://www.sirinevlerfinal.com';
+  const origin = 'https://www.bahcelievlersevinc.com';
   const path = `${origin}/${locale}/services/${slug}`;
 
   if (!isValidSlug(slug)) {

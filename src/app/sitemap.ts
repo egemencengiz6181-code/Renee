@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { works } from '@/config/works';
 
-const origin = 'https://www.sirinevlerfinal.com';
+const origin = 'https://www.bahcelievlersevinc.com';
 const locales = ['tr'] as const;
 
 const serviceSlugs = [
