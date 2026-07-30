@@ -109,8 +109,8 @@ Not: ${formData.note || "-"}
         className="absolute top-8 left-1/2 -translate-x-1/2"
       >
         <Image
-          src="/logos/final-logo.png"
-          alt="Şirinevler Final Dershanesi"
+          src="/logos/Sevinc-Kurs-Logo.png"
+          alt="Bahçelievler Sevinç Dershanesi"
           width={120}
           height={120}
           className="object-contain"
@@ -125,7 +125,7 @@ Not: ${formData.note || "-"}
         animate="visible"
         className="relative w-full max-w-2xl mx-auto mt-32"
       >
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-black/10 dark:border-white/10 p-8 shadow-[0_20px_60px_rgba(226,31,38,0.15)]">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-black/10 dark:border-white/10 p-8 shadow-[0_20px_60px_rgba(227,82,5,0.15)]">
           {/* Header */}
           <div className="text-center mb-8">
             <motion.div
@@ -133,10 +133,10 @@ Not: ${formData.note || "-"}
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#E21F26]/30 bg-[#E21F26]/10 mb-4"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#E35205]/30 bg-[#E35205]/10 mb-4"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E21F26] animate-pulse" />
-              <span className="text-xs font-semibold tracking-[0.25em] uppercase text-[#E21F26]/80">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E35205] animate-pulse" />
+              <span className="text-xs font-semibold tracking-[0.25em] uppercase text-[#E35205]/80">
                 Kayıt Formu
               </span>
             </motion.div>
@@ -171,7 +171,7 @@ Not: ${formData.note || "-"}
               className="space-y-2"
             >
               <label className="text-sm font-semibold text-slate-700 dark:text-white/80">
-                Öğrenci Adı Soyadı <span className="text-[#E21F26]">*</span>
+                Öğrenci Adı Soyadı <span className="text-[#E35205]">*</span>
               </label>
               <input
                 type="text"
@@ -179,7 +179,7 @@ Not: ${formData.note || "-"}
                 value={formData.studentName}
                 onChange={handleChange}
                 required
-                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 outline-none focus:border-[#E21F26] transition-colors"
+                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 outline-none focus:border-[#E35205] transition-colors"
                 placeholder="Örn: Ahmet Yılmaz"
               />
             </motion.div>
@@ -193,7 +193,7 @@ Not: ${formData.note || "-"}
               className="space-y-2"
             >
               <label className="text-sm font-semibold text-slate-700 dark:text-white/80">
-                Veli Adı Soyadı <span className="text-[#E21F26]">*</span>
+                Veli Adı Soyadı <span className="text-[#E35205]">*</span>
               </label>
               <input
                 type="text"
@@ -201,7 +201,7 @@ Not: ${formData.note || "-"}
                 value={formData.parentName}
                 onChange={handleChange}
                 required
-                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 outline-none focus:border-[#E21F26] transition-colors"
+                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 outline-none focus:border-[#E35205] transition-colors"
                 placeholder="Örn: Mehmet Yılmaz"
               />
             </motion.div>
@@ -215,7 +215,7 @@ Not: ${formData.note || "-"}
               className="space-y-2"
             >
               <label className="text-sm font-semibold text-slate-700 dark:text-white/80">
-                Telefon Numarası <span className="text-[#E21F26]">*</span>
+                Telefon Numarası <span className="text-[#E35205]">*</span>
               </label>
               <input
                 type="tel"
@@ -223,7 +223,7 @@ Not: ${formData.note || "-"}
                 value={formData.phone}
                 onChange={handleChange}
                 required
-                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 outline-none focus:border-[#E21F26] transition-colors"
+                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 outline-none focus:border-[#E35205] transition-colors"
                 placeholder="0555 555 55 55"
               />
             </motion.div>
@@ -244,7 +244,7 @@ Not: ${formData.note || "-"}
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 outline-none focus:border-[#E21F26] transition-colors"
+                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 outline-none focus:border-[#E35205] transition-colors"
                 placeholder="ornek@email.com"
               />
             </motion.div>
@@ -258,14 +258,14 @@ Not: ${formData.note || "-"}
               className="space-y-2"
             >
               <label className="text-sm font-semibold text-slate-700 dark:text-white/80">
-                Önümüzdeki Yıl Sınıfı <span className="text-[#E21F26]">*</span>
+                Önümüzdeki Yıl Sınıfı <span className="text-[#E35205]">*</span>
               </label>
               <select
                 name="grade"
                 value={formData.grade}
                 onChange={handleChange}
                 required
-                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white outline-none focus:border-[#E21F26] transition-colors"
+                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white outline-none focus:border-[#E35205] transition-colors"
               >
                 <option value="">Seçiniz</option>
                 <option value="9. Sınıf">9. Sınıf</option>
@@ -285,7 +285,7 @@ Not: ${formData.note || "-"}
               className="space-y-2"
             >
               <label className="text-sm font-semibold text-slate-700 dark:text-white/80">
-                Mevcut Okulu <span className="text-[#E21F26]">*</span>
+                Mevcut Okulu <span className="text-[#E35205]">*</span>
               </label>
               <input
                 type="text"
@@ -293,7 +293,7 @@ Not: ${formData.note || "-"}
                 value={formData.currentSchool}
                 onChange={handleChange}
                 required
-                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 outline-none focus:border-[#E21F26] transition-colors"
+                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 outline-none focus:border-[#E35205] transition-colors"
                 placeholder="Örn: Bahçelievler Anadolu Lisesi"
               />
             </motion.div>
@@ -307,7 +307,7 @@ Not: ${formData.note || "-"}
               className="space-y-2"
             >
               <label className="text-sm font-semibold text-slate-700 dark:text-white/80">
-                Bulunduğunuz İlçe <span className="text-[#E21F26]">*</span>
+                Bulunduğunuz İlçe <span className="text-[#E35205]">*</span>
               </label>
               <input
                 type="text"
@@ -315,7 +315,7 @@ Not: ${formData.note || "-"}
                 value={formData.district}
                 onChange={handleChange}
                 required
-                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 outline-none focus:border-[#E21F26] transition-colors"
+                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 outline-none focus:border-[#E35205] transition-colors"
                 placeholder="Örn: Bahçelievler"
               />
             </motion.div>
@@ -329,14 +329,14 @@ Not: ${formData.note || "-"}
               className="space-y-2"
             >
               <label className="text-sm font-semibold text-slate-700 dark:text-white/80">
-                İlgilendiğiniz Program <span className="text-[#E21F26]">*</span>
+                İlgilendiğiniz Program <span className="text-[#E35205]">*</span>
               </label>
               <select
                 name="program"
                 value={formData.program}
                 onChange={handleChange}
                 required
-                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white outline-none focus:border-[#E21F26] transition-colors"
+                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white outline-none focus:border-[#E35205] transition-colors"
               >
                 <option value="">Seçiniz</option>
                 <option value="Lise Programları">Lise Programları</option>
@@ -365,7 +365,7 @@ Not: ${formData.note || "-"}
                 value={formData.note}
                 onChange={handleChange}
                 rows={4}
-                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 outline-none focus:border-[#E21F26] transition-colors resize-none"
+                className="w-full bg-background/50 border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 outline-none focus:border-[#E35205] transition-colors resize-none"
                 placeholder="Eklemek istediğiniz herhangi bir not..."
               />
             </motion.div>
@@ -378,7 +378,7 @@ Not: ${formData.note || "-"}
               animate="visible"
               type="submit"
               disabled={loading}
-              className="group w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#E21F26] hover:bg-[#BE1821] text-white font-semibold text-base tracking-wide transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_0_32px_rgba(226,31,38,0.45)] hover:shadow-[0_0_48px_rgba(226,31,38,0.6)] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#E35205] hover:bg-[#A03500] text-white font-semibold text-base tracking-wide transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_0_32px_rgba(227,82,5,0.45)] hover:shadow-[0_0_48px_rgba(227,82,5,0.6)] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <>

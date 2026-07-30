@@ -34,6 +34,21 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
+    keywords: [
+      'Bahçelievler dershane',
+      'Bahçelievler Sevinç',
+      'YKS hazırlık',
+      'LGS hazırlık',
+      'ortaokul dershane',
+      'lise dershane',
+      'İstanbul dershane',
+      'özel ders',
+      'üniversite hazırlık',
+      'Şirinevler dershane',
+      'Siyavuşpaşa dershane',
+      'etüt merkezi',
+    ],
+    category: 'education',
     alternates: {
       canonical: `${origin}/${locale}`,
     },
@@ -44,11 +59,33 @@ export async function generateMetadata({
       title: t('title'),
       description: t('description'),
       url: `${origin}/${locale}`,
+      images: [
+        {
+          url: `${origin}/logos/Sevinc-Kurs-Logo.png`,
+          width: 1200,
+          height: 630,
+          alt: 'Bahçelievler Sevinç Dershanesi',
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: t('title'),
       description: t('description'),
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    icons: {
+      icon: '/logos/Sevinc-Kurs-Logo.png',
+      apple: '/logos/Sevinc-Kurs-Logo.png',
     },
   };
 }

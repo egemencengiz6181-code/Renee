@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Phone, MessageCircle } from "lucide-react";
 
@@ -10,6 +10,18 @@ interface ContactPopupProps {
 
 export default function ContactPopup({ children }: ContactPopupProps) {
   const [open, setOpen] = useState(false);
+
+  // ── Lock body scroll when modal opens ──
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
 
   return (
     <>
@@ -29,7 +41,7 @@ export default function ContactPopup({ children }: ContactPopupProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[200] bg-black/60 backdrop-blur-sm"
+              className="fixed inset-0 z-[200] bg-black/60 "
               onClick={() => setOpen(false)}
             />
 

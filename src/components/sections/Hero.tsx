@@ -1,107 +1,18 @@
 'use client';
 
 import {useTranslations} from 'next-intl';
-import {motion, useMotionValue, useSpring, useTransform} from 'framer-motion';
-import {useEffect, useState} from 'react';
+import {motion} from 'framer-motion';
+import {useState} from 'react';
 import ContactModal from '@/components/shared/ContactModal';
 
-function AnimatedBackground() {
-  const mouseX = useMotionValue(0.5);
-  const mouseY = useMotionValue(0.5);
-
-  const springX = useSpring(mouseX, {stiffness: 40, damping: 30});
-  const springY = useSpring(mouseY, {stiffness: 40, damping: 30});
-
-  const auraX = useTransform(springX, [0, 1], ['-55%', '-25%']);
-  const auraY = useTransform(springY, [0, 1], ['-55%', '-25%']);
-
-  useEffect(() => {
-    const handleMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX / window.innerWidth);
-      mouseY.set(e.clientY / window.innerHeight);
-    };
-    window.addEventListener('mousemove', handleMove);
-    return () => window.removeEventListener('mousemove', handleMove);
-  }, [mouseX, mouseY]);
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Base dark */}
-      <div className="absolute inset-0 bg-background" />
-
-      {/* Primary aura — follows cursor */}
-      <motion.div
-        className="absolute w-[900px] h-[900px] rounded-full  opacity-20"
-        style={{
-          background: 'radial-gradient(circle, #6d28d9 0%, #4c1d95 50%, transparent 80%)',
-          x: auraX,
-          y: auraY,
-          left: '50%',
-          top: '50%',
-        }}
-      />
-
-      {/* Accent halo — slow idle float */}
-      <motion.div
-        className="absolute w-[600px] h-[600px] rounded-full "
-        style={{
-          background: 'radial-gradient(circle, #a855f7 0%, transparent 70%)',
-          opacity: 0.15,
-          left: '20%',
-          top: '30%',
-        }}
-        animate={{
-          x: [0, 30, -20, 0],
-          y: [0, -25, 15, 0],
-          scale: [1, 1.08, 0.96, 1],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-
-      {/* Deep cold violet — bottom right */}
-      <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full  opacity-10"
-        style={{
-          background: 'radial-gradient(circle, #312e81 0%, transparent 70%)',
-          right: '10%',
-          bottom: '15%',
-        }}
-        animate={{
-          x: [0, -20, 10, 0],
-          y: [0, 20, -10, 0],
-        }}
-        transition={{
-          duration: 22,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-
-      {/* Subtle noise grain overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          backgroundSize: '200px',
-        }}
-      />
-    </div>
-  );
-}
-
 const wordVariants = {
-  hidden: {opacity: 0, y: 28, filter: 'blur(6px)'},
+  hidden: {opacity: 0, y: 20},
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: {
-      delay: 0.3 + i * 0.08,
-      duration: 0.65,
+      delay: 0.1 + i * 0.05,
+      duration: 0.5,
       ease: [0.22, 1, 0.36, 1],
     },
   }),
@@ -113,8 +24,8 @@ const fadeUp = {
     opacity: 1,
     y: 0,
     transition: {
-      delay: 0.3 + i * 0.15,
-      duration: 0.7,
+      delay: 0.1 + i * 0.1,
+      duration: 0.6,
       ease: [0.22, 1, 0.36, 1],
     },
   }),
@@ -132,14 +43,23 @@ export default function Hero({locale}: HeroProps) {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <AnimatedBackground />
+      {/* Simple gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted" />
+      
+      {/* Subtle glow (no blur) */}
+      <div 
+        className="absolute inset-0 opacity-10"
+        style={{
+          background: 'radial-gradient(circle at 50% 50%, #6d28d9 0%, transparent 50%)',
+        }}
+      />
 
       {/* Fine horizontal rule at top */}
       <motion.div
         className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"
         initial={{scaleX: 0, opacity: 0}}
         animate={{scaleX: 1, opacity: 1}}
-        transition={{duration: 1.4, ease: 'easeOut'}}
+        transition={{duration: 1.2, ease: 'easeOut'}}
       />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
@@ -195,7 +115,6 @@ export default function Hero({locale}: HeroProps) {
           >
             {/* Glow layer */}
             <span className="absolute inset-0 rounded-full bg-primary opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
-            <span className="absolute inset-0 rounded-full bg-primary blur-xl scale-75 opacity-0 group-hover:opacity-60 group-hover:scale-110 transition-all duration-500" />
             {/* Inner border shine */}
             <span className="absolute inset-[1px] rounded-full bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
             <span className="relative">{t('cta')}</span>

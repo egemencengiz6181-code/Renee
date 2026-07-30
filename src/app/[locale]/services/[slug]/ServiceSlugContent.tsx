@@ -34,7 +34,7 @@ function PhaseCard({ title, text, index }: { title: string; text: string; index:
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="relative p-8 rounded-3xl border border-black/5 dark:border-white/5 bg-black/[0.03] dark:bg-white/[0.03] backdrop-blur-sm hover:border-[#E35205]/20 hover:bg-black/[0.05] dark:hover:bg-white/[0.05] transition-all duration-500 group"
+      className="relative p-8 rounded-3xl border border-black/5 dark:border-white/5 bg-black/[0.03] dark:bg-white/[0.03]  hover:border-[#E35205]/20 hover:bg-black/[0.05] dark:hover:bg-white/[0.05] transition-all duration-500 group"
     >
       <div className="text-7xl font-black text-black/[0.04] dark:text-white/[0.04] group-hover:text-[#E35205]/10 transition-colors duration-500 absolute top-4 right-6 leading-none select-none">
         {num}
@@ -91,7 +91,7 @@ export default function ServiceSlugContent({ slug, images, i18n }: Props) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* ── AMBIENT GLOW ─────────────────────────────────────────────── */}
-      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[#E35205]/8 blur-[180px] rounded-full pointer-events-none -z-10" />
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[#E35205]/8  rounded-full pointer-events-none -z-10" />
 
       {/* ── BACK NAV ─────────────────────────────────────────────────── */}
       <div className="max-w-5xl mx-auto px-6 pt-36 pb-0">
@@ -147,7 +147,7 @@ export default function ServiceSlugContent({ slug, images, i18n }: Props) {
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/30 via-transparent to-background/30" />
           <div className="absolute bottom-8 left-8">
-            <div className="px-4 py-2 rounded-xl bg-background/80 backdrop-blur-md border border-black/10 dark:border-white/10 inline-flex">
+            <div className="px-4 py-2 rounded-xl bg-background/80  border border-black/10 dark:border-white/10 inline-flex">
               <span className="text-sm font-bold text-slate-900 dark:text-white">{i18n.item_title}</span>
             </div>
           </div>
@@ -163,7 +163,7 @@ export default function ServiceSlugContent({ slug, images, i18n }: Props) {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="lg:sticky lg:top-32 p-8 rounded-3xl border border-black/5 dark:border-white/5 bg-black/[0.03] dark:bg-white/[0.03] backdrop-blur-sm"
+            className="lg:sticky lg:top-32 p-8 rounded-3xl border border-black/5 dark:border-white/5 bg-black/[0.03] dark:bg-white/[0.03] "
           >
             <h3 className="text-xs font-bold uppercase tracking-[0.25em] text-[#E35205] mb-6">{i18n.scope}</h3>
             <ul className="space-y-3">
@@ -238,7 +238,7 @@ export default function ServiceSlugContent({ slug, images, i18n }: Props) {
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-[#E35205]/20 to-background/70" />
-            <div className="absolute bottom-6 left-6 px-4 py-2 rounded-xl bg-background/80 backdrop-blur-md border border-white/10 inline-flex items-center gap-2">
+            <div className="absolute bottom-6 left-6 px-4 py-2 rounded-xl bg-background/80  border border-white/10 inline-flex items-center gap-2">
               <Cpu className="w-3.5 h-3.5 text-[#E35205]" />
               <span className="text-xs font-semibold text-[#E35205]">{i18n.tech_section}</span>
             </div>
