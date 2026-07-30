@@ -260,7 +260,7 @@ function SectionCard({ section, index }: { section: SectionItem; index: number }
 /* ─── Stat card ──────────────────────────────────────────────────────── */
 function StatCard({ icon: Icon, label, color }: { icon: React.ElementType; label: string; color: string }) {
   return (
-    <div className="flex items-center gap-3 p-5 rounded-2xl border border-black/[0.06] dark:border-white/[0.06] bg-black/[0.02] dark:bg-white/[0.02] backdrop-blur-sm">
+    <div className="flex items-center gap-3 p-5 rounded-2xl border border-black/[0.06] dark:border-white/[0.06] bg-black/[0.02] dark:bg-white/[0.02] ">
       <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: color + '20' }}>
         <Icon className="w-5 h-5" style={{ color }} />
       </div>
@@ -279,9 +279,9 @@ export default function RehberlikPage() {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
 
       {/* ambient glows */}
-      <div className="fixed top-[-80px] left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[#2E3192]/8 blur-[180px] rounded-full pointer-events-none -z-10" />
-      <div className="fixed top-[40%] right-[-80px] w-[500px] h-[500px] bg-[#E21F26]/5 blur-[150px] rounded-full pointer-events-none -z-10" />
-      <div className="fixed bottom-0 left-[-80px] w-[400px] h-[400px] bg-[#2E3192]/5 blur-[140px] rounded-full pointer-events-none -z-10" />
+      <div className="fixed top-[-80px] left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[#2E3192]/8  rounded-full pointer-events-none -z-10" />
+      <div className="fixed top-[40%] right-[-80px] w-[500px] h-[500px] bg-[#E21F26]/5  rounded-full pointer-events-none -z-10" />
+      <div className="fixed bottom-0 left-[-80px] w-[400px] h-[400px] bg-[#2E3192]/5  rounded-full pointer-events-none -z-10" />
 
       {/* ══ HERO ════════════════════════════════════════════════════════ */}
       <section ref={heroRef} className="relative min-h-[85vh] flex items-center pt-32 pb-20 px-6">
@@ -291,7 +291,7 @@ export default function RehberlikPage() {
             <div>
               <motion.div
                 variants={fadeUp} custom={0} initial="hidden" animate="show"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#2E3192]/30 bg-[#2E3192]/[0.08] backdrop-blur-sm mb-8"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#2E3192]/30 bg-[#2E3192]/[0.08]  mb-8"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#2E3192]" />
                 <span className="text-xs font-bold uppercase tracking-[0.3em] text-[#2E3192]">Şirinevler Final Dershanesi</span>
@@ -336,8 +336,8 @@ export default function RehberlikPage() {
             </div>
 
             <motion.div variants={fadeUp} custom={4} initial="hidden" animate="show" className="relative">
-              <div className="absolute -inset-4 rounded-[40px] blur-[60px] opacity-25 pointer-events-none" style={{ background: `linear-gradient(135deg,${BLUE}50,${RED}30)` }} />
-              <div className="relative rounded-3xl border border-black/[0.07] dark:border-white/[0.07] bg-black/[0.03] dark:bg-white/[0.03] backdrop-blur-2xl p-8">
+              <div className="absolute -inset-4 rounded-[40px]  opacity-25 pointer-events-none" style={{ background: `linear-gradient(135deg,${BLUE}50,${RED}30)` }} />
+              <div className="relative rounded-3xl border border-black/[0.07] dark:border-white/[0.07] bg-black/[0.03] dark:bg-white/[0.03]  p-8">
                 <GlowingEffect spread={50} glow disabled={false} proximity={80} inactiveZone={0.01} borderWidth={2} />
 
                 <div className="flex items-center gap-3 mb-6 px-4 py-3 rounded-2xl border border-[#E21F26]/20 bg-[#E21F26]/[0.07]">

@@ -41,8 +41,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           {/* Backdrop */}
           <motion.div
             key="contact-backdrop"
-            className="fixed inset-0 z-[100] bg-black/60"
-            style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
+            className="fixed inset-0 z-[100] bg-black/70"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -53,18 +52,16 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           {/* Modal panel */}
           <motion.div
             key="contact-modal"
-            className="fixed inset-0 z-[101] flex items-center justify-center p-4"
+            className="fixed inset-0 z-[101] flex items-center justify-center p-4 overflow-y-auto"
             initial={{ opacity: 0, scale: 0.93, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.93, y: 24 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
             <div
-              className="relative w-full max-w-md rounded-3xl overflow-hidden"
+              className="relative w-full max-w-md my-auto rounded-3xl overflow-hidden max-h-[90vh] overflow-y-auto"
               style={{
-                background: 'rgba(8, 8, 18, 0.80)',
-                backdropFilter: 'blur(30px)',
-                WebkitBackdropFilter: 'blur(30px)',
+                background: 'rgba(8, 8, 18, 0.90)',
                 border: '1px solid rgba(255, 255, 255, 0.08)',
                 boxShadow: '0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07)',
               }}

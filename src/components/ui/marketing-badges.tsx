@@ -113,7 +113,7 @@ export default function MarketingBadges() {
               transition={{ type: "spring", stiffness: 120, damping: 14, delay: index * 0.05 }}
               whileTap={{ scale: 0.95 }}
               className={cn(
-                "flex items-center gap-2 px-5 py-3 rounded-2xl border border-white/10 shadow-lg backdrop-blur-md cursor-pointer",
+                "flex items-center gap-2 px-5 py-3 rounded-2xl border border-white/10 shadow-lg  cursor-pointer",
                 "bg-gradient-to-br font-bold text-white text-sm",
                 badge.color
               )}
@@ -128,7 +128,7 @@ export default function MarketingBadges() {
       {/* ── DESKTOP: yüzen scattered layout ── */}
       <div className="hidden md:flex relative h-[500px] w-full items-center justify-center overflow-visible">
         {/* Background Ambience */}
-        <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute inset-0 bg-primary/5  rounded-full pointer-events-none" />
 
         {badges.map((badge, index) => {
           const isHovered = hoveredId === badge.id;
@@ -153,7 +153,7 @@ export default function MarketingBadges() {
               }}
               whileTap={{ scale: 0.95 }}
               className={cn(
-                "absolute flex items-center gap-3 px-8 py-4 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-md transition-all duration-500 group cursor-pointer",
+                "absolute flex items-center gap-3 px-8 py-4 rounded-2xl border border-white/10 shadow-2xl  transition-all duration-500 group cursor-pointer",
                 "bg-gradient-to-br font-bold text-white",
                 badge.color
               )}

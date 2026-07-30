@@ -104,7 +104,7 @@ export default function WorkDetailPage({
         <div className="absolute top-28 left-6 md:left-12">
           <Link
             href={"/" as any}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm text-white/60 hover:text-white text-sm font-medium transition-all hover:border-white/30"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5  text-white/60 hover:text-white text-sm font-medium transition-all hover:border-white/30"
           >
             <ArrowLeft className="w-4 h-4" />
             {t("back_home")}
