@@ -3,7 +3,6 @@
 import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, Loader2, ArrowRight } from "lucide-react";
-import Image from "next/image";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -100,30 +99,13 @@ Not: ${formData.note || "-"}
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-background via-background to-muted px-6 py-20">
-      {/* Logo */}
+      {/* Form Container */}
       <motion.div
         custom={0}
         variants={fadeUp}
         initial="hidden"
         animate="visible"
-        className="absolute top-8 left-1/2 -translate-x-1/2"
-      >
-        <Image
-          src="/logos/Sevinc-Kurs-Logo.png"
-          alt="Bahçelievler Sevinç Dershanesi"
-          width={120}
-          height={120}
-          className="object-contain"
-        />
-      </motion.div>
-
-      {/* Form Container */}
-      <motion.div
-        custom={1}
-        variants={fadeUp}
-        initial="hidden"
-        animate="visible"
-        className="relative w-full max-w-2xl mx-auto mt-32"
+        className="relative w-full max-w-2xl mx-auto"
       >
         <div className="bg-white dark:bg-slate-900 rounded-2xl border border-black/10 dark:border-white/10 p-8 shadow-[0_20px_60px_rgba(227,82,5,0.15)]">
           {/* Header */}
