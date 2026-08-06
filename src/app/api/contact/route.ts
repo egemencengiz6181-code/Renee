@@ -25,6 +25,47 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// ── Gönderim yolu ───────────────────────────────────────────────────────────
+// RESEND_API_KEY tanımlıysa Resend üzerinden gönderilir (SMTP'ye hiç
+// dokunulmaz; Office365'in SMTP politikasına bağımlılık ortadan kalkar).
+// Tanımlı değilse klasik SMTP yolu kullanılır. Böylece hangi yöntem
+// kullanılabilir hale gelirse, kod değişmeden sadece env ile seçilir.
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const RESEND_ENDPOINT = process.env.RESEND_API_URL ?? 'https://api.resend.com/emails';
+const RESEND_FROM = process.env.RESEND_FROM ?? FROM_EMAIL;
+const FROM_NAME = 'Şirinevler Final Dershanesi';
+
+async function deliver(subject: string, html: string, replyTo?: string) {
+  if (RESEND_API_KEY) {
+    const res = await fetch(RESEND_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: `${FROM_NAME} <${RESEND_FROM}>`,
+        to: [TO_EMAIL],
+        subject,
+        html,
+        ...(replyTo ? { reply_to: replyTo } : {}),
+      }),
+    });
+    if (!res.ok) {
+      throw new Error(`Resend ${res.status}: ${await res.text()}`);
+    }
+    return;
+  }
+
+  await transporter.sendMail({
+    from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
+    to: TO_EMAIL,
+    replyTo,
+    subject,
+    html,
+  });
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -88,14 +129,11 @@ export async function POST(req: NextRequest) {
       `;
     }
 
-    await transporter.sendMail({
-      from: `"\u015eirinevler Final Dershanesi" <${FROM_EMAIL}>`,
-      to: TO_EMAIL,
-      // Maili a\u00e7an ki\u015fi do\u011frudan formu dolduran ki\u015fiye cevap verebilsin.
-      replyTo: typeof data.email === 'string' && data.email.includes('@') ? data.email : undefined,
-      subject,
-      html,
-    });
+    // Maili a\u00e7an ki\u015fi do\u011frudan formu dolduran ki\u015fiye cevap verebilsin.
+    const replyTo =
+      typeof data.email === 'string' && data.email.includes('@') ? data.email : undefined;
+
+    await deliver(subject, html, replyTo);
 
     console.log('[Contact API] Email sent:', subject, data);
 
