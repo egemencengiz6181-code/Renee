@@ -5,11 +5,40 @@ import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Send } from 'lucide-react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { useState } from 'react';
 const LocationMap = dynamic(() => import('@/components/shared/LocationMap'), { ssr: false, loading: () => <div className="h-[450px] bg-background" /> });
 const LetsWorkSection = dynamic(() => import('@/components/ui/lets-work-section'), { ssr: false, loading: () => <div className="h-64" /> });
 
 export default function ContactPage() {
   const t = useTranslations('Contact');
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState(false);
+
+  const set = (k: keyof typeof form, v: string) => setForm((p) => ({ ...p, [k]: v }));
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name || !form.email) return;
+    setLoading(true);
+    setError(false);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'contact', ...form }),
+      });
+      if (!res.ok) throw new Error('request failed');
+      setSent(true);
+      setForm({ name: '', email: '', subject: '', message: '' });
+    } catch (err) {
+      console.error(err);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen pt-40 pb-24 relative overflow-hidden bg-transparent z-10">
@@ -99,29 +128,60 @@ export default function ContactPage() {
             transition={{ delay: 0.2 }}
             className="p-10 rounded-[40px] bg-slate-100 dark:bg-accent-muted border border-black/10 dark:border-white/10  relative"
           >
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-foreground/40 ml-1">{t('form.name')}</label>
-                  <input type="text" className="w-full px-6 py-4 rounded-2xl bg-background/50 border border-black/10 dark:border-white/10 focus:border-primary-light outline-none transition-colors font-light text-sm" />
+                  <input
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={(e) => set('name', e.target.value)}
+                    className="w-full px-6 py-4 rounded-2xl bg-background/50 border border-black/10 dark:border-white/10 focus:border-primary-light outline-none transition-colors font-light text-sm"
+                  />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-foreground/40 ml-1">{t('form.email')}</label>
-                  <input type="email" className="w-full px-6 py-4 rounded-2xl bg-background/50 border border-black/10 dark:border-white/10 focus:border-primary-light outline-none transition-colors font-light text-sm" />
+                  <input
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={(e) => set('email', e.target.value)}
+                    className="w-full px-6 py-4 rounded-2xl bg-background/50 border border-black/10 dark:border-white/10 focus:border-primary-light outline-none transition-colors font-light text-sm"
+                  />
                 </div>
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground/40 ml-1">{t('form.subject')}</label>
-                <input type="text" className="w-full px-6 py-4 rounded-2xl bg-background/50 border border-black/10 dark:border-white/10 focus:border-primary-light outline-none transition-colors font-light text-sm" />
+                <input
+                  type="text"
+                  value={form.subject}
+                  onChange={(e) => set('subject', e.target.value)}
+                  className="w-full px-6 py-4 rounded-2xl bg-background/50 border border-black/10 dark:border-white/10 focus:border-primary-light outline-none transition-colors font-light text-sm"
+                />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground/40 ml-1">{t('form.message')}</label>
-                <textarea rows={4} className="w-full px-6 py-4 rounded-2xl bg-background/50 border border-black/10 dark:border-white/10 focus:border-primary-light outline-none transition-colors font-light text-sm resize-none"></textarea>
+                <textarea
+                  rows={4}
+                  value={form.message}
+                  onChange={(e) => set('message', e.target.value)}
+                  className="w-full px-6 py-4 rounded-2xl bg-background/50 border border-black/10 dark:border-white/10 focus:border-primary-light outline-none transition-colors font-light text-sm resize-none"
+                ></textarea>
               </div>
-              <button className="w-full py-5 bg-[#E35205] hover:bg-[#A03500] text-white font-medium rounded-2xl transition-all shadow-[0_0_20px_rgba(227,82,5,0.3)] hover:shadow-[0_0_30px_rgba(227,82,5,0.5)] flex items-center justify-center gap-2 group">
-                {t('form.send')}
-                <Send className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <button
+                type="submit"
+                disabled={loading || sent}
+                className="w-full py-5 bg-[#E35205] hover:bg-[#A03500] disabled:opacity-60 disabled:cursor-not-allowed text-white font-medium rounded-2xl transition-all shadow-[0_0_20px_rgba(227,82,5,0.3)] hover:shadow-[0_0_30px_rgba(227,82,5,0.5)] flex items-center justify-center gap-2 group"
+              >
+                {loading ? 'Gönderiliyor…' : sent ? 'Mesajınız iletildi ✓' : t('form.send')}
+                {!loading && !sent && <Send className="w-4 h-4 transition-transform group-hover:translate-x-1" />}
               </button>
+              {error && (
+                <p className="text-sm text-center text-red-500">
+                  Mesaj gönderilemedi. Lütfen tekrar deneyin ya da telefonla ulaşın.
+                </p>
+              )}
             </form>
           </motion.div>
         </div>

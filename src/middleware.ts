@@ -94,6 +94,13 @@ export function middleware(request: NextRequest): NextResponse {
     return new NextResponse(null, { status: 414 });
   }
 
+  // ── API rotaları i18n middleware'e girmemeli ──
+  // Aksi halde /api/contact → /tr/api/contact yönlendirilip 404 dönüyor,
+  // yani hiçbir form gönderimi karşı tarafa ulaşmıyor.
+  if (path.startsWith("/api")) {
+    return NextResponse.next();
+  }
+
   // ── Meşru trafik → i18n middleware ──
   return intlMiddleware(request) as NextResponse;
 }

@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+// Tüm form gönderimlerinin düştüğü adres. Vercel'de CONTACT_TO_EMAIL
+// tanımlanırsa kod değiştirmeden buradan yönlendirilebilir.
+const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? 'alim.demirli@abdkurumlari.com';
+
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST ?? 'smtp.gmail.com',
   port: Number(process.env.SMTP_PORT ?? 465),
@@ -54,7 +58,9 @@ export async function POST(req: NextRequest) {
       `;
     } else {
       // LetsWork / general contact
-      subject = `💼 Yeni İletişim Mesajı — ${data.name || 'İsimsiz'}`;
+      subject = data.subject
+        ? `💼 ${data.subject} — ${data.name || 'İsimsiz'}`
+        : `💼 Yeni İletişim Mesajı — ${data.name || 'İsimsiz'}`;
       html = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #05010d; color: #f2f2f2; padding: 32px; border-radius: 16px; border: 1px solid #2d1b66;">
           <h1 style="color: #8b5cf6; font-size: 24px; margin-bottom: 24px;">💼 Yeni İletişim Mesajı</h1>
@@ -62,6 +68,7 @@ export async function POST(req: NextRequest) {
             <tr><td style="padding: 8px 0; color: #a3a3a3; width: 120px;">Ad Soyad</td><td style="padding: 8px 0; color: #f2f2f2;">${data.name || '—'}</td></tr>
             <tr><td style="padding: 8px 0; color: #a3a3a3;">E-posta</td><td style="padding: 8px 0; color: #f2f2f2;">${data.email || '—'}</td></tr>
             <tr><td style="padding: 8px 0; color: #a3a3a3;">Telefon</td><td style="padding: 8px 0; color: #f2f2f2;">${data.phone || '—'}</td></tr>
+            ${data.subject ? `<tr><td style="padding: 8px 0; color: #a3a3a3;">Konu</td><td style="padding: 8px 0; color: #f2f2f2;">${data.subject}</td></tr>` : ''}
           </table>
           <h2 style="color: #8b5cf6; font-size: 16px; margin-top: 24px;">Mesaj</h2>
           <p style="background: #1e1033; padding: 16px; border-radius: 8px; color: #f2f2f2; border-left: 3px solid #8b5cf6;">${data.message || '—'}</p>
@@ -73,7 +80,7 @@ export async function POST(req: NextRequest) {
 
     await transporter.sendMail({
       from: '"\u015eirinevler Final Dershanesi" <sirinevlerfinalozelogretim@abdkurumlari.com>',
-      to: 'sirinevlerfinalozelogretim@abdkurumlari.com',
+      to: TO_EMAIL,
       subject,
       html,
     });
