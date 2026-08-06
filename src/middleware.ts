@@ -104,6 +104,6 @@ export const config = {
      * Statik dosyalar (_next/static, _next/image, favicon.ico, public assets)
      * HARİÇ her şeyi yakala — böylece bot istekleri de middleware'den geçer.
      */
-    "/((?!_next/static|_next/image|favicon.ico|logos|okul|okul2|works|sitemap.xml|robots.txt).*)",
+    "/((?!_next/static|_next/image|favicon.ico|logos|okul|okul2|works|slider|sitemap.xml|robots.txt).*)",
   ],
 };

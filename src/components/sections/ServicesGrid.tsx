@@ -6,13 +6,19 @@ const serviceSlugs = ['9-sinif', '10-sinif', '11-sinif', '12-sinif', 'mezun', '1
 export default async function ServicesSection() {
   const t = await getTranslations('Services');
 
-  const services = serviceSlugs.map((slug) => ({
-    slug,
-    title: t(`items.${slug}.title`),
-    description: t(`items.${slug}.description`),
-    href: `/services/${slug}`,
-    features: (t.raw(`items.${slug}.features`) as string[]).slice(0, 4),
-  }));
+  const services = serviceSlugs
+    // Çeviri dosyasında karşılığı olmayan slug'ları atla (aksi halde sayfa render sırasında patlıyor)
+    .filter((slug) => t.has(`items.${slug}.title`) && t.has(`items.${slug}.features`))
+    .map((slug) => {
+      const features = t.raw(`items.${slug}.features`);
+      return {
+        slug,
+        title: t(`items.${slug}.title`),
+        description: t(`items.${slug}.description`),
+        href: `/services/${slug}`,
+        features: (Array.isArray(features) ? (features as string[]) : []).slice(0, 4),
+      };
+    });
 
   return (
     <section className="py-32 relative overflow-hidden bg-transparent">
