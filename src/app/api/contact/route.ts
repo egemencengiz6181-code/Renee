@@ -5,12 +5,22 @@ import nodemailer from 'nodemailer';
 // tanımlanırsa kod değiştirmeden buradan yönlendirilebilir.
 const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? 'alim.demirli@abdkurumlari.com';
 
+// Office365 587 (STARTTLS) ile çalışır; 465 ise baştan TLS ister.
+// secure değerini porta göre seçiyoruz, yoksa 587'de el sıkışma başarısız oluyor.
+const SMTP_PORT = Number(process.env.SMTP_PORT ?? 587);
+const SMTP_USER = process.env.SMTP_USER ?? TO_EMAIL;
+
+// Office365 yalnızca kimlik doğrulanan kutu adına gönderime izin verir;
+// bu yüzden gönderen adresi SMTP kullanıcısıyla aynı olmalı.
+const FROM_EMAIL = SMTP_USER;
+
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST ?? 'smtp.gmail.com',
-  port: Number(process.env.SMTP_PORT ?? 465),
-  secure: true,
+  host: process.env.SMTP_HOST ?? 'smtp.office365.com',
+  port: SMTP_PORT,
+  secure: SMTP_PORT === 465,
+  requireTLS: SMTP_PORT !== 465,
   auth: {
-    user: process.env.SMTP_USER,
+    user: SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
 });
@@ -79,8 +89,10 @@ export async function POST(req: NextRequest) {
     }
 
     await transporter.sendMail({
-      from: '"\u015eirinevler Final Dershanesi" <sirinevlerfinalozelogretim@abdkurumlari.com>',
+      from: `"\u015eirinevler Final Dershanesi" <${FROM_EMAIL}>`,
       to: TO_EMAIL,
+      // Maili a\u00e7an ki\u015fi do\u011frudan formu dolduran ki\u015fiye cevap verebilsin.
+      replyTo: typeof data.email === 'string' && data.email.includes('@') ? data.email : undefined,
       subject,
       html,
     });
@@ -89,7 +101,12 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
+    // Ayrıntı sunucu loglarında kalsın (Vercel → Logs); ziyaretçiye SMTP
+    // sunucu/hesap bilgisi sızdıran ham hata mesajı dönmemeli.
     console.error('[Contact API] Error:', err);
-    return NextResponse.json({ success: false, error: String(err) }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: 'E-posta gönderilemedi.' },
+      { status: 500 }
+    );
   }
 }
